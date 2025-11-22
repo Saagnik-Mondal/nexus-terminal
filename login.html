@@ -10,7 +10,21 @@
     <div class="scanline"></div>
     <div class="noise"></div>
     
-    <div class="login-container">
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="logo-icon-large">◈</span>
+                <span class="logo-text-large">NEXUS</span>
+            </div>
+            <div class="loading-text">INITIALIZING SYSTEM</div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
+            <div class="loading-status" id="loadingStatus">LOADING MODULES...</div>
+        </div>
+    </div>
+    
+    <div class="login-container" id="loginContainer" style="display: none;">
         <div class="login-panel">
             <div class="login-header">
                 <div class="login-logo">
@@ -67,6 +81,53 @@
         </div>
     </div>
     
+    <script>
+        // Loading screen animation
+        const loadingStatus = document.getElementById('loadingStatus');
+        const loadingProgress = document.getElementById('loadingProgress');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const loginContainer = document.getElementById('loginContainer');
+        
+        const steps = [
+            { text: 'LOADING MODULES...', duration: 300 },
+            { text: 'INITIALIZING SECURITY PROTOCOLS...', duration: 400 },
+            { text: 'ESTABLISHING ENCRYPTED CONNECTION...', duration: 500 },
+            { text: 'VERIFYING SYSTEM INTEGRITY...', duration: 400 },
+            { text: 'LOADING USER INTERFACE...', duration: 300 },
+            { text: 'SYSTEM READY', duration: 200 }
+        ];
+        
+        let currentStep = 0;
+        let progress = 0;
+        
+        function updateLoading() {
+            if (currentStep < steps.length) {
+                loadingStatus.textContent = steps[currentStep].text;
+                progress += (100 / steps.length);
+                loadingProgress.style.width = progress + '%';
+                
+                setTimeout(() => {
+                    currentStep++;
+                    updateLoading();
+                }, steps[currentStep].duration);
+            } else {
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        loginContainer.style.display = 'flex';
+                        setTimeout(() => {
+                            loginContainer.style.opacity = '1';
+                        }, 50);
+                    }, 500);
+                }, 300);
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            setTimeout(updateLoading, 500);
+        });
+    </script>
     <script src="login.js"></script>
 </body>
 </html>

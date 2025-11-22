@@ -39,14 +39,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    animation: fadeOut 0.5s ease-out 4s forwards;
-}
-
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-        visibility: hidden;
-    }
+    transition: opacity 0.5s ease-out;
 }
 
 .loading-content {
@@ -59,12 +52,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-.loading-icon {
-    font-size: 60px;
+.logo-icon-large {
+    font-size: 80px;
     color: var(--text-secondary);
     animation: spinPulse 3s infinite;
 }
@@ -80,22 +73,22 @@ body {
     }
 }
 
-.loading-text {
-    font-size: 48px;
+.logo-text-large {
+    font-size: 60px;
     font-weight: bold;
-    letter-spacing: 8px;
+    letter-spacing: 10px;
     color: var(--primary-color);
     text-shadow: 0 0 20px var(--glow-color);
 }
 
-.loading-subtitle {
-    font-size: 14px;
+.loading-text {
+    font-size: 18px;
     letter-spacing: 4px;
     color: var(--text-muted);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
-.loading-bar-container {
+.loading-bar {
     width: 100%;
     height: 4px;
     background: var(--bg-card);
@@ -103,31 +96,35 @@ body {
     margin: 30px 0;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+    position: relative;
 }
 
-.loading-bar {
+.loading-progress {
     height: 100%;
     background: linear-gradient(90deg, var(--primary-color), var(--text-secondary));
     width: 0%;
-    animation: loadProgress 4s ease-out forwards;
+    transition: width 0.3s ease-out;
     box-shadow: 0 0 20px var(--glow-color);
-}
-
-@keyframes loadProgress {
-    0% { width: 0%; }
-    20% { width: 25%; }
-    40% { width: 50%; }
-    60% { width: 75%; }
-    80% { width: 90%; }
-    100% { width: 100%; }
 }
 
 .loading-status {
     font-size: 14px;
     letter-spacing: 2px;
     color: var(--text-secondary);
-    margin-bottom: 30px;
+    margin-top: 20px;
+    min-height: 20px;
     animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Login Container */
+.login-container {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
 }
 
 .loading-details {
