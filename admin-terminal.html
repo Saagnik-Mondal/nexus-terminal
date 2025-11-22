@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - ADMIN TERMINAL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="noise"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">◈</span>
+                    <span class="logo-text">NEXUS ADMIN TERMINAL</span>
+                </div>
+                <div class="status-bar">
+                    <span class="status-item">
+                        <span class="status-dot"></span>
+                        ROOT ACCESS GRANTED
+                    </span>
+                    <span class="status-item">
+                        <span class="status-dot"></span>
+                        ENCRYPTION: QUANTUM-256
+                    </span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="system-time" id="systemTime"></div>
+                <div class="user-info">
+                    <div class="user-role" id="userRole">ADMINISTRATOR</div>
+                    <div class="user-name" id="userName">USER: ADMIN</div>
+                </div>
+                <button id="backToMainBtn" class="logout-btn">BACK TO MAIN</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <span class="terminal-title">NEXUS COMMAND INTERFACE v3.7.2</span>
+                    <span class="terminal-info">Type 'help' for available commands</span>
+                </div>
+                
+                <div class="terminal-output" id="terminalOutput">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">NEXUS@ADMIN</span>
+                        <span class="terminal-text">System initialized. Security protocols active.</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">NEXUS@ADMIN</span>
+                        <span class="terminal-text">Connected to database cluster: MAINFRAME-ALPHA-01</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">NEXUS@ADMIN</span>
+                        <span class="terminal-text">Awaiting command input...</span>
+                    </div>
+                </div>
+                
+                <div class="terminal-input-wrapper">
+                    <span class="terminal-cursor">NEXUS@ADMIN $</span>
+                    <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" autofocus>
+                </div>
+                
+                <div class="terminal-hints">
+                    <div class="hint-section">
+                        <div class="hint-title">QUICK COMMANDS:</div>
+                        <div class="hint-commands">
+                            <span class="hint-cmd">ls</span>
+                            <span class="hint-cmd">users</span>
+                            <span class="hint-cmd">sessions</span>
+                            <span class="hint-cmd">logs</span>
+                            <span class="hint-cmd">stats</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="admin-terminal.js"></script>
+</body>
+</html>

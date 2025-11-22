@@ -26,12 +26,34 @@ loginForm.addEventListener('submit', (e) => {
             sessionStorage.setItem('clearanceLevel', credentials[username].level);
             sessionStorage.setItem('authenticated', 'true');
             
+            const accessLogs = JSON.parse(localStorage.getItem('accessLogs') || '[]');
+            accessLogs.push({
+                timestamp: new Date().toISOString(),
+                user: username.toUpperCase(),
+                ip: `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`,
+                location: 'LOCAL',
+                action: 'LOGIN',
+                status: 'SUCCESS'
+            });
+            localStorage.setItem('accessLogs', JSON.stringify(accessLogs));
+            
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 1000);
         } else {
             loginStatus.textContent = 'ACCESS DENIED - INVALID CREDENTIALS';
             loginStatus.style.color = '#ff0040';
+            
+            const accessLogs = JSON.parse(localStorage.getItem('accessLogs') || '[]');
+            accessLogs.push({
+                timestamp: new Date().toISOString(),
+                user: username.toUpperCase(),
+                ip: `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`,
+                location: 'UNKNOWN',
+                action: 'FAILED_LOGIN',
+                status: 'BLOCKED'
+            });
+            localStorage.setItem('accessLogs', JSON.stringify(accessLogs));
             
             document.getElementById('password').value = '';
             

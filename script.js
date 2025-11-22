@@ -246,9 +246,17 @@ function init() {
     if (userRole === 'admin') {
         addNewBtn.style.display = 'inline-block';
         webScrapeBtn.style.display = 'inline-block';
+        document.getElementById('adminTerminalBtn').style.display = 'inline-block';
     }
     
     document.getElementById('logoutBtn').addEventListener('click', logout);
+    
+    const adminTerminalBtn = document.getElementById('adminTerminalBtn');
+    if (adminTerminalBtn) {
+        adminTerminalBtn.addEventListener('click', () => {
+            window.location.href = 'admin-terminal.html';
+        });
+    }
     
     updateDatabaseCount();
     updateTime();
