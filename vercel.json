@@ -12,8 +12,32 @@
       "dest": "api/index.py"
     },
     {
-      "src": "/(.*)",
+      "src": "/login.html",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/index.html",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/admin-terminal.html",
+      "dest": "/admin-terminal.html"
+    },
+    {
+      "src": "/(.*\\.js)",
       "dest": "/$1"
+    },
+    {
+      "src": "/(.*\\.css)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/faces/(.*)",
+      "dest": "/faces/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/login.html"
     }
   ]
 }
