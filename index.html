@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - Security Database Access Terminal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="loading-icon">◈</span>
+                <span class="loading-text">NEXUS</span>
+            </div>
+            <div class="loading-subtitle">SECURITY TERMINAL</div>
+            
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            
+            <div class="loading-status" id="loadingStatus">INITIALIZING SECURE CONNECTION...</div>
+            
+            <div class="loading-details">
+                <div class="loading-step" id="step1">⬢ ESTABLISHING ENCRYPTED CHANNEL...</div>
+                <div class="loading-step" id="step2">⬢ VERIFYING BIOMETRIC CREDENTIALS...</div>
+                <div class="loading-step" id="step3">⬢ LOADING DATABASE MODULES...</div>
+                <div class="loading-step" id="step4">⬢ SYNCHRONIZING NEURAL INTERFACE...</div>
+                <div class="loading-step" id="step5">⬢ ACCESSING MAINFRAME...</div>
+            </div>
+            
+            <div class="loading-footer">
+                <span class="loading-warning">⚠ UNAUTHORIZED ACCESS IS FORBIDDEN</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="scanline"></div>
+    <div class="noise"></div>
+    
+    <div class="container" id="mainContainer" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">◈</span>
+                    <span class="logo-text">NEXUS TERMINAL</span>
+                </div>
+                <div class="status-bar">
+                    <span class="status-item">
+                        <span class="status-dot"></span>
+                        SECURE CONNECTION ESTABLISHED
+                    </span>
+                    <span class="status-item">
+                        <span class="status-dot"></span>
+                        ENCRYPTION: AES-256
+                    </span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="system-time" id="systemTime"></div>
+                <div class="user-info">USER: ADMIN_001</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-header">
+                    <h1 class="search-title">DATABASE QUERY INTERFACE</h1>
+                    <div class="search-subtitle">Enter subject name to retrieve classified information</div>
+                </div>
+                
+                <div class="search-box">
+                    <div class="search-input-wrapper">
+                        <span class="search-prompt">></span>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="search-input" 
+                            placeholder="ENTER TARGET NAME..."
+                            autocomplete="off"
+                        >
+                        <button id="searchBtn" class="search-btn">EXECUTE</button>
+                        <button id="addNewBtn" class="add-new-btn">+ ADD NEW SUBJECT</button>
+                        <button id="webScrapeBtn" class="web-scrape-btn">🌐 WEB SEARCH</button>
+                    </div>
+                    <div class="search-stats" id="searchStats">DATABASE CONTAINS <span id="dbCount">6</span> RECORDS</div>
+                </div>
+            </section>
+
+            <!-- Web Scraping Section -->
+            <section class="web-scrape-section" id="webScrapeSection" style="display: none;">
+                <div class="results-header">
+                    <h2 class="results-title">
+                        <span class="blink">◆</span> WEB INTELLIGENCE GATHERING
+                    </h2>
+                    <button id="cancelScrapeBtn" class="clear-btn">CANCEL</button>
+                </div>
+
+                <div class="scrape-container">
+                    <div class="scrape-info">
+                        <p>Enter a person's name or company to search across multiple sources:</p>
+                        <ul>
+                            <li>LinkedIn profiles</li>
+                            <li>Social media (Twitter, Facebook, Instagram)</li>
+                            <li>Public records and news articles</li>
+                            <li>Company websites</li>
+                            <li>Government databases</li>
+                        </ul>
+                    </div>
+
+                    <form id="webScrapeForm" class="scrape-form">
+                        <div class="form-group">
+                            <label class="form-label">TARGET NAME / COMPANY</label>
+                            <input type="text" id="scrapeQuery" name="query" class="form-input" required placeholder="ENTER NAME OR ORGANIZATION">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">SEARCH SOURCES</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="wikipedia" checked> Wikipedia
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="github" checked> GitHub
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="twitter" checked> Twitter/X
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="linkedin"> LinkedIn
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="news" checked> News Articles
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="google" checked> Google Search
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">IMAGE SCRAPING</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="scrapeImages" checked> Download Profile Photos
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="scrapeAllImages"> Download All Images
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="facialRecognition" checked> Facial Recognition
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="search-btn">START SCRAPING</button>
+                            <button type="button" id="cancelScrapeFormBtn" class="clear-btn">CANCEL</button>
+                        </div>
+                    </form>
+
+                    <div id="scrapeProgress" class="scrape-progress" style="display: none;">
+                        <div class="progress-header">SCANNING INTERNET...</div>
+                        <div class="progress-logs" id="scrapeLogs"></div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="scrapeProgressBar"></div>
+                        </div>
+                    </div>
+
+                    <div id="scrapeResults" class="scrape-results" style="display: none;">
+                        <div class="results-header">
+                            <h3>INTELLIGENCE GATHERED</h3>
+                        </div>
+                        <div id="scrapeResultsContent"></div>
+                        
+                        <!-- Image Gallery -->
+                        <div id="imageGallery" class="image-gallery" style="display: none;">
+                            <div class="card-header">
+                                <span class="card-icon">▣</span>
+                                SCRAPED IMAGES (<span id="imageCount">0</span>)
+                            </div>
+                            <div id="imageGalleryContent" class="image-gallery-content"></div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button id="saveScrapeBtn" class="search-btn">SAVE TO DATABASE</button>
+                            <button id="discardScrapeBtn" class="clear-btn">DISCARD</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add New Person Form -->
+            <section class="add-form-section" id="addFormSection" style="display: none;">
+                <div class="results-header">
+                    <h2 class="results-title">
+                        <span class="blink">◆</span> ADD NEW SUBJECT TO DATABASE
+                    </h2>
+                    <button id="cancelAddBtn" class="clear-btn">CANCEL</button>
+                </div>
+
+                <form id="addPersonForm" class="add-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">FULL NAME *</label>
+                            <input type="text" name="name" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">STATUS *</label>
+                            <select name="status" class="form-input" required>
+                                <option value="ACTIVE">ACTIVE</option>
+                                <option value="UNDER SURVEILLANCE">UNDER SURVEILLANCE</option>
+                                <option value="WATCHLIST">WATCHLIST</option>
+                                <option value="INACTIVE">INACTIVE</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">AGE *</label>
+                            <input type="number" name="age" class="form-input" required min="1" max="120">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">NATIONALITY *</label>
+                            <input type="text" name="nationality" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">OCCUPATION *</label>
+                            <input type="text" name="occupation" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">BLOOD TYPE</label>
+                            <select name="bloodType" class="form-input">
+                                <option value="">SELECT</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">CITY *</label>
+                            <input type="text" name="city" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ADDRESS</label>
+                            <input type="text" name="address" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">EMAIL *</label>
+                            <input type="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">PHONE</label>
+                            <input type="tel" name="phone" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">CLEARANCE LEVEL</label>
+                            <select name="clearanceLevel" class="form-input">
+                                <option value="LEVEL 1 - BASIC">LEVEL 1 - BASIC</option>
+                                <option value="LEVEL 2 - RESTRICTED">LEVEL 2 - RESTRICTED</option>
+                                <option value="LEVEL 3 - CONFIDENTIAL">LEVEL 3 - CONFIDENTIAL</option>
+                                <option value="LEVEL 4 - SECRET">LEVEL 4 - SECRET</option>
+                                <option value="LEVEL 5 - TOP SECRET">LEVEL 5 - TOP SECRET</option>
+                                <option value="LEVEL 6 - COSMIC TOP SECRET">LEVEL 6 - COSMIC TOP SECRET</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">THREAT LEVEL</label>
+                            <select name="threatLevel" class="form-input">
+                                <option value="LOW">LOW</option>
+                                <option value="MEDIUM">MEDIUM</option>
+                                <option value="HIGH">HIGH</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="search-btn">SAVE TO DATABASE</button>
+                        <button type="button" id="cancelFormBtn" class="clear-btn">CANCEL</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2 class="results-title">
+                        <span class="blink">◆</span> DATA RETRIEVED
+                    </h2>
+                    <button id="clearBtn" class="clear-btn">CLEAR</button>
+                </div>
+
+                <div class="results-grid">
+                    <!-- Profile Card -->
+                    <div class="result-card profile-card">
+                        <div class="card-header">
+                            <span class="card-icon">▣</span>
+                            SUBJECT PROFILE
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-image-container">
+                                <div class="profile-image" id="profileImage"></div>
+                                <div class="scan-overlay"></div>
+                            </div>
+                            <div class="profile-info">
+                                <div class="info-row">
+                                    <span class="info-label">NAME:</span>
+                                    <span class="info-value" id="profileName"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">STATUS:</span>
+                                    <span class="info-value status-active" id="profileStatus"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">ID:</span>
+                                    <span class="info-value" id="profileId"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Info Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <span class="card-icon">▣</span>
+                            PERSONAL DATA
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <span class="info-label">AGE:</span>
+                                <span class="info-value" id="age"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">NATIONALITY:</span>
+                                <span class="info-value" id="nationality"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">OCCUPATION:</span>
+                                <span class="info-value" id="occupation"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">BLOOD TYPE:</span>
+                                <span class="info-value" id="bloodType"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <span class="card-icon">▣</span>
+                            LOCATION DATA
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <span class="info-label">CITY:</span>
+                                <span class="info-value" id="city"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">ADDRESS:</span>
+                                <span class="info-value" id="address"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">COORDINATES:</span>
+                                <span class="info-value" id="coordinates"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <span class="card-icon">▣</span>
+                            CONTACT INFO
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <span class="info-label">EMAIL:</span>
+                                <span class="info-value" id="email"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">PHONE:</span>
+                                <span class="info-value" id="phone"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">ENCRYPTED ID:</span>
+                                <span class="info-value" id="encryptedId"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Clearance Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <span class="card-icon">▣</span>
+                            SECURITY CLEARANCE
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <span class="info-label">LEVEL:</span>
+                                <span class="info-value" id="clearanceLevel"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">THREAT LEVEL:</span>
+                                <span class="info-value" id="threatLevel"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">LAST ACCESS:</span>
+                                <span class="info-value" id="lastAccess"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Biometric Data Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <span class="card-icon">▣</span>
+                            BIOMETRIC DATA
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <span class="info-label">DNA HASH:</span>
+                                <span class="info-value" id="dnaHash"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">RETINAL SCAN:</span>
+                                <span class="info-value" id="retinalScan"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">FINGERPRINT:</span>
+                                <span class="info-value" id="fingerprint"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="activity-log">
+                    <div class="card-header">
+                        <span class="card-icon">▣</span>
+                        RECENT ACTIVITY LOG
+                    </div>
+                    <div class="log-content" id="activityLog"></div>
+                </div>
+            </section>
+
+            <!-- No Results -->
+            <section class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-content">
+                    <div class="error-icon">⚠</div>
+                    <div class="error-text">NO MATCHING RECORDS FOUND</div>
+                    <div class="error-subtext">Subject not found in database. Check spelling and try again.</div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-item">NEXUS SYSTEMS © 2045</div>
+            <div class="footer-item">CLASSIFIED - TOP SECRET</div>
+            <div class="footer-item">UNAUTHORIZED ACCESS FORBIDDEN</div>
+        </footer>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <button class="image-modal-close" id="closeModal">✕ CLOSE</button>
+        <img id="modalImage" class="image-modal-content" src="" alt="Full size image">
+    </div>
+
+    <script src="loading.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
