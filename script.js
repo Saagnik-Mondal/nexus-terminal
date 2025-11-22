@@ -1,13 +1,18 @@
-// Load database from localStorage or use default
 console.log('=== SCRIPT LOADING ===');
 
-// yeah I know this is overkill but localStorage is pretty neat for this
+if (!sessionStorage.getItem('authenticated')) {
+    window.location.href = 'login.html';
+}
+
+const userRole = sessionStorage.getItem('userRole');
+const userName = sessionStorage.getItem('username');
+const clearanceLevel = sessionStorage.getItem('clearanceLevel');
+
 function loadDatabase() {
     const stored = localStorage.getItem('nexusDatabase');
     if (stored) {
         return JSON.parse(stored);
     }
-    // if nothing's there, just return the defaults
     return getDefaultDatabase();
 }
 
@@ -35,7 +40,7 @@ function getDefaultDatabase() {
         threatLevel: "LOW",
         lastAccess: "2045.11.20 14:23:41",
         dnaHash: "9A2F8C4E1B7D3A5F",
-        retinalScan: "VERIFIED ✓",
+        retinalScan: "VERIFIED",
         fingerprint: "MATCH CONFIRMED",
         activities: [
             { time: "14:23:41", text: "ACCESS GRANTED: MAINFRAME DATABASE" },
@@ -63,7 +68,7 @@ function getDefaultDatabase() {
         threatLevel: "MEDIUM",
         lastAccess: "2045.11.21 22:18:33",
         dnaHash: "7F3E9A1C5B2D8F4A",
-        retinalScan: "VERIFIED ✓",
+        retinalScan: "VERIFIED",
         fingerprint: "MATCH CONFIRMED",
         activities: [
             { time: "22:18:33", text: "ACCESSED NEURAL NETWORK FILES" },
@@ -91,7 +96,7 @@ function getDefaultDatabase() {
         threatLevel: "LOW",
         lastAccess: "2045.11.22 08:42:17",
         dnaHash: "3D8F2A9E7C1B5F4D",
-        retinalScan: "VERIFIED ✓",
+        retinalScan: "VERIFIED",
         fingerprint: "MATCH CONFIRMED",
         activities: [
             { time: "08:42:17", text: "DECRYPTION PROTOCOL INITIATED" },
@@ -119,7 +124,7 @@ function getDefaultDatabase() {
         threatLevel: "LOW",
         lastAccess: "2045.11.22 15:30:52",
         dnaHash: "8B5A3F9D2E7C1A4F",
-        retinalScan: "VERIFIED ✓",
+        retinalScan: "VERIFIED",
         fingerprint: "MATCH CONFIRMED",
         activities: [
             { time: "15:30:52", text: "MAINFRAME SYNCHRONIZATION COMPLETE" },
@@ -175,7 +180,7 @@ function getDefaultDatabase() {
         threatLevel: "LOW",
         lastAccess: "2045.11.21 16:55:29",
         dnaHash: "5C3A9F7E2D8B4F1A",
-        retinalScan: "VERIFIED ✓",
+        retinalScan: "VERIFIED",
         fingerprint: "MATCH CONFIRMED",
         activities: [
             { time: "16:55:29", text: "BIG DATA ANALYSIS COMPLETED" },
@@ -202,9 +207,7 @@ let imageGalleryContent, imageCount, imageModal, modalImage, closeModal;
 let scrapedData = null;
 let scrapedImages = [];
 
-// main setup function - runs when page is ready
 function init() {
-    // grab all the DOM elements we need
     searchInput = document.getElementById('searchInput');
     searchBtn = document.getElementById('searchBtn');
     searchStats = document.getElementById('searchStats');
@@ -237,9 +240,15 @@ function init() {
     modalImage = document.getElementById('modalImage');
     closeModal = document.getElementById('closeModal');
     
-    console.log('Init called');
-    console.log('webScrapeBtn:', webScrapeBtn);
-    console.log('webScrapeSection:', webScrapeSection);
+    document.getElementById('userName').textContent = `USER: ${userName}`;
+    document.getElementById('userRole').textContent = clearanceLevel;
+    
+    if (userRole === 'admin') {
+        addNewBtn.style.display = 'inline-block';
+        webScrapeBtn.style.display = 'inline-block';
+    }
+    
+    document.getElementById('logoutBtn').addEventListener('click', logout);
     
     updateDatabaseCount();
     updateTime();
@@ -365,7 +374,7 @@ async function handleWebScrape(e) {
     if (useRealScraping) {
         await performRealWebScraping(query, sources, imageOptions);
     } else {
-        addLog('⚠️ ERROR: API Server not running', false, 0);
+        addLog('[WARNING] ERROR: API Server not running', false, 0);
         addLog('Please start the server:', false, 300);
         addLog('cd "/Volumes/X9 Pro/Project0" && ./venv/bin/python3 api_server.py &', false, 600);
         setTimeout(() => {
@@ -389,7 +398,7 @@ async function checkAPIServer() {
 
 // Perform REAL web scraping using backend API
 async function performRealWebScraping(query, sources, imageOptions) {
-    addLog('🌐 REAL WEB SCRAPING ACTIVATED', true, 0);
+    addLog('[WEB] REAL WEB SCRAPING ACTIVATED', true, 0);
     addLog('Connecting to scraping server...', true, 300);
     
     try {
@@ -409,18 +418,18 @@ async function performRealWebScraping(query, sources, imageOptions) {
             throw new Error('Scraping failed');
         }
         
-        addLog('✓ Receiving data from web...', true, 900);
+        addLog('[OK] Receiving data from web...', true, 900);
         const data = await response.json();
         
-        addLog(`✓ Found data from: ${data.sources.join(', ')}`, true, 1200);
+        addLog(`[OK] Found data from: ${data.sources.join(', ')}`, true, 1200);
         addLog('Processing intelligence...', true, 1500);
         
         // Convert API response to our format
         scrapedData = convertAPIDataToFormat(data, query);
         scrapedImages = data.images || [];
         
-        addLog(`✓ ${scrapedImages.length} images downloaded`, true, 1800);
-        addLog('✓ REAL SCRAPING COMPLETE', true, 2100);
+        addLog(`[OK] ${scrapedImages.length} images downloaded`, true, 1800);
+        addLog('[OK] REAL SCRAPING COMPLETE', true, 2100);
         
         scrapeProgressBar.style.width = '100%';
         
@@ -434,7 +443,7 @@ async function performRealWebScraping(query, sources, imageOptions) {
         }, 2500);
         
     } catch (error) {
-        addLog('⚠️ ERROR: Real scraping failed - ' + error.message, false, 0);
+        addLog('[WARNING] ERROR: Real scraping failed - ' + error.message, false, 0);
         addLog('Check API server is running on port 5001', false, 300);
     }
 }
@@ -603,7 +612,7 @@ function saveScrapeData() {
     saveDatabase(database);
     updateDatabaseCount();
     
-    searchStats.textContent = `✓ INTELLIGENCE ON "${newPerson.name}" SAVED TO DATABASE`;
+    searchStats.textContent = `[OK] INTELLIGENCE ON "${newPerson.name}" SAVED TO DATABASE`;
     searchStats.style.color = 'var(--primary-color)';
     
     hideWebScrape();
@@ -638,7 +647,7 @@ function displayImageGallery() {
                 <div>${img.description}</div>
                 <div>${img.timestamp}</div>
                 <div id="face-analysis-${index}" class="face-analysis" style="margin-top:5px;font-size:11px;color:#00ff41;">
-                    <span class="analyzing">🔍 AI ANALYZING...</span>
+                    <span class="analyzing">[SCAN] AI ANALYZING...</span>
                 </div>
             </div>
         </div>
@@ -695,14 +704,14 @@ async function analyzeFacesInGallery() {
                     );
                     const emotionProb = Math.round(expressions[topEmotion] * 100);
                     
-                    analysisDiv.innerHTML = `✓ AGE: ~${age} | ${gender.toUpperCase()} (${genderProb}%) | ${topEmotion.toUpperCase()} (${emotionProb}%)`;
+                    analysisDiv.innerHTML = `[OK] AGE: ~${age} | ${gender.toUpperCase()} (${genderProb}%) | ${topEmotion.toUpperCase()} (${emotionProb}%)`;
                     analysisDiv.style.color = '#00ff41';
                 } else {
-                    analysisDiv.innerHTML = '⚠ NO FACE DETECTED';
+                    analysisDiv.innerHTML = '[WARNING] NO FACE DETECTED';
                     analysisDiv.style.color = '#ff9500';
                 }
             } catch (err) {
-                analysisDiv.innerHTML = '⚠ ANALYSIS FAILED';
+                analysisDiv.innerHTML = '[WARNING] ANALYSIS FAILED';
                 analysisDiv.style.color = '#ff4136';
             }
         }
@@ -770,7 +779,7 @@ function handleAddPerson(e) {
     // Check if person already exists
     const exists = database.find(p => p.name.toUpperCase() === name);
     if (exists) {
-        alert('⚠ ERROR: SUBJECT ALREADY EXISTS IN DATABASE');
+        alert('[WARNING] ERROR: SUBJECT ALREADY EXISTS IN DATABASE');
         return;
     }
     
@@ -798,7 +807,7 @@ function handleAddPerson(e) {
         threatLevel: formData.get('threatLevel') || 'LOW',
         lastAccess: getCurrentTimestamp(),
         dnaHash: generateDNAHash(),
-        retinalScan: 'VERIFIED ✓',
+        retinalScan: 'VERIFIED',
         fingerprint: 'MATCH CONFIRMED',
         activities: [
             { time: new Date().toLocaleTimeString('en-US', { hour12: false }), text: 'SUBJECT ADDED TO DATABASE' },
@@ -815,7 +824,7 @@ function handleAddPerson(e) {
     updateDatabaseCount();
     
     // Show success message
-    searchStats.textContent = `✓ SUBJECT "${newPerson.name}" SUCCESSFULLY ADDED TO DATABASE`;
+    searchStats.textContent = `[OK] SUBJECT "${newPerson.name}" SUCCESSFULLY ADDED TO DATABASE`;
     searchStats.style.color = 'var(--primary-color)';
     
     // Hide form and show the new person
@@ -971,16 +980,15 @@ function clearResults() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Sound effect (optional)
+function logout() {
+    sessionStorage.clear();
+    window.location.href = 'login.html';
+}
+
 function playSound(type) {
-    // You can add sound effects here if desired
-    // For now, it's a placeholder
 }
 
 // Initialize on load
-console.log('=== SETTING UP DOMContentLoaded LISTENER ===');
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('=== DOMContentLoaded FIRED ===');
     init();
 });
-console.log('=== LISTENER SET UP COMPLETE ===');

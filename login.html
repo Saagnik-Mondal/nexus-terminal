@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - AUTHENTICATION REQUIRED</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="noise"></div>
+    
+    <div class="login-container">
+        <div class="login-panel">
+            <div class="login-header">
+                <div class="login-logo">
+                    <span class="logo-icon">◈</span>
+                    <span class="logo-text">NEXUS</span>
+                </div>
+                <div class="login-subtitle">SECURE ACCESS TERMINAL</div>
+            </div>
+            
+            <div class="login-warning">
+                <span class="warning-icon">▲</span>
+                <span>AUTHORIZED PERSONNEL ONLY</span>
+                <span class="warning-icon">▲</span>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="login-field">
+                    <label class="login-label">ACCESS LEVEL</label>
+                    <select id="userType" class="login-select">
+                        <option value="admin">ADMINISTRATOR</option>
+                        <option value="user">STANDARD USER</option>
+                    </select>
+                </div>
+                
+                <div class="login-field">
+                    <label class="login-label">USER IDENTIFICATION</label>
+                    <input type="text" id="username" class="login-input" placeholder="ENTER USERNAME" required>
+                </div>
+                
+                <div class="login-field">
+                    <label class="login-label">SECURITY PASSPHRASE</label>
+                    <input type="password" id="password" class="login-input" placeholder="ENTER PASSWORD" required>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">AUTHENTICATE</span>
+                    <span class="btn-icon">►</span>
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <div class="login-status" id="loginStatus"></div>
+                <div class="login-info">
+                    <div class="info-line">DEFAULT ADMIN: admin / admin123</div>
+                    <div class="info-line">DEFAULT USER: user / user123</div>
+                </div>
+            </div>
+            
+            <div class="system-status">
+                <div class="status-line">ENCRYPTION: QUANTUM-256</div>
+                <div class="status-line">FIREWALL: ACTIVE</div>
+                <div class="status-line">INTRUSION DETECTION: ONLINE</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="login.js"></script>
+</body>
+</html>

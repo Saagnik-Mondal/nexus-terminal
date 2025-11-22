@@ -60,7 +60,11 @@
             </div>
             <div class="header-right">
                 <div class="system-time" id="systemTime"></div>
-                <div class="user-info">USER: ADMIN_001</div>
+                <div class="user-info">
+                    <div class="user-role" id="userRole">ROLE: LOADING...</div>
+                    <div class="user-name" id="userName">USER: LOADING...</div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">DISCONNECT</button>
             </div>
         </header>
 
@@ -84,8 +88,8 @@
                             autocomplete="off"
                         >
                         <button id="searchBtn" class="search-btn">EXECUTE</button>
-                        <button id="addNewBtn" class="add-new-btn">+ ADD NEW SUBJECT</button>
-                        <button id="webScrapeBtn" class="web-scrape-btn">🌐 WEB SEARCH</button>
+                        <button id="addNewBtn" class="add-new-btn" style="display: none;">ADD SUBJECT</button>
+                        <button id="webScrapeBtn" class="web-scrape-btn" style="display: none;">WEB SEARCH</button>
                     </div>
                     <div class="search-stats" id="searchStats">DATABASE CONTAINS <span id="dbCount">6</span> RECORDS</div>
                 </div>

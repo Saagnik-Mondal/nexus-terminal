@@ -1137,3 +1137,211 @@ body {
         text-align: center;
     }
 }
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-panel {
+    background: var(--bg-card);
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 50px var(--glow-color);
+    animation: slideIn 0.5s;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+}
+
+.login-warning {
+    background: var(--bg-darker);
+    border: 2px solid var(--danger-color);
+    border-left: 4px solid var(--danger-color);
+    padding: 15px;
+    text-align: center;
+    color: var(--danger-color);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    animation: pulse 2s infinite;
+}
+
+.warning-icon {
+    font-size: 14px;
+    margin: 0 10px;
+}
+
+.login-form {
+    margin-bottom: 20px;
+}
+
+.login-field {
+    margin-bottom: 20px;
+}
+
+.login-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.login-select,
+.login-input {
+    width: 100%;
+    background: var(--bg-darker);
+    border: 2px solid var(--border-color);
+    color: var(--primary-color);
+    padding: 12px 15px;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 4px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.login-select:focus,
+.login-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+.login-btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: var(--bg-darker);
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 3px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px var(--glow-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-btn:hover {
+    background: var(--text-secondary);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    transform: scale(1.02);
+}
+
+.login-btn:active {
+    transform: scale(0.98);
+}
+
+.login-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.login-status {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 2px;
+    min-height: 20px;
+    margin-bottom: 15px;
+}
+
+.login-info {
+    background: var(--bg-darker);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.info-line {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin: 5px 0;
+}
+
+.system-status {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.status-line {
+    font-size: 10px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.status-line::before {
+    content: '◆';
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.user-role {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.user-name {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.logout-btn {
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 2px;
+    border-radius: 2px;
+    transition: all 0.3s;
+    margin-left: 15px;
+}
+
+.logout-btn:hover {
+    box-shadow: 0 0 15px rgba(255, 0, 64, 0.5);
+    transform: scale(1.05);
+}
