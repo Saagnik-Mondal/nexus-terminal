@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+api_server.py
+run_server.sh
+start.sh
+server.log
+server_output.log
+debug.html
+test.html
